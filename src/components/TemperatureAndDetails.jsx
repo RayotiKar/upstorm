@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+//import { useState } from "react";
 // import Forecast from "./Forecast";
 
 import {
@@ -30,8 +30,8 @@ function TemperatureAndDetails({
   return (
     <>
       <div className="flex">
-        <div className="flex flex-col ml-10">
-          <div className="flex items-center justify-evenly text-blue-body mt-8 ml-12 py-3 bg-white bg-opacity-50 rounded-md">
+        <div className="flex flex-col">
+          <div className="flex items-center justify-evenly text-blue-body py-3 bg-white bg-opacity-50 rounded-md">
             <div>
               <img
                 src={iconUrlFromCode(icon)}
@@ -58,7 +58,7 @@ function TemperatureAndDetails({
               </div>
             </div>
           </div>
-          <div className="ml-12">
+          <div className="">
             <p className="font-medium text-lg text-black my-3">
               Today's Highlights
             </p>
@@ -67,28 +67,28 @@ function TemperatureAndDetails({
               <div className="bg-white bg-opacity-50 rounded-md flex flex-col w-44">
                 <span className="ml-1 text-blue-body">Humidity</span>
                 <span className="mx-20 text-lg font-semibold text-blue-body">{`${humidity.toFixed()}`}</span>
-                <span className="mb-0 ml-1 text-blue-body">%</span>
+                <span className="ml-1 text-blue-body">%</span>
               </div>
               <div className="bg-white bg-opacity-50 rounded-md flex flex-col ml-4 w-44">
                 <span className="ml-1 text-blue-body">Wind</span>
                 <span className="mx-20 text-lg font-semibold text-blue-body">{`${speed.toFixed()}`}</span>
-                <span className="mb-0 ml-1 text-blue-body">km/h</span>
+                <span className="ml-1 text-blue-body">km/h</span>
               </div>
             </div>
             <div className="flex justify-between">
-              <div className="bg-white bg-opacity-50 rounded-md flex flex-col mt-4 w-44 mb-8">
+              <div className="bg-white bg-opacity-50 rounded-md flex flex-col mt-6 w-44">
                 <span className="ml-1 text-blue-body">Sunrise</span>
                 <span className="mx-16 text-lg font-semibold text-blue-body">
                   {formatToLocalTime(sunrise, timezone, "hh:mm")}
                 </span>
-                <span className="mb-0 ml-1 text-blue-body">am</span>
+                <span className=" ml-1 text-blue-body">am</span>
               </div>
-              <div className="bg-white bg-opacity-50 rounded-md flex flex-col mt-4 ml-4 w-44 mb-8">
+              <div className="bg-white bg-opacity-50 rounded-md flex flex-col mt-6 w-44 ">
                 <span className="ml-1 text-blue-body">Sunset</span>
                 <span className="mx-16 text-lg font-semibold text-blue-body">
                   {formatToLocalTime(sunset, timezone, "hh:mm")}
                 </span>
-                <span className="mb-0 ml-1 text-blue-body">pm</span>
+                <span className=" ml-1 text-blue-body">pm</span>
               </div>
             </div>
           </div>

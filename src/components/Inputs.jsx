@@ -56,7 +56,7 @@ function Inputs({ setQuery, units, setUnits }) {
           onKeyUp={searchLocation}
           type="text"
           placeholder="Search for any location"
-          className="text-xl font-Quicksand m-5 p-2 rounded-md w-96 bg-blue-sb shadow-xl focus:outline-none capitalize placeholder:lowercase"
+          className="text-xl font-Quicksand m-5 p-2 rounded-md w-60 md:w-96 bg-blue-sb shadow-xl focus:outline-none capitalize placeholder:lowercase"
         />
         <div className="h-11 w-24 rounded-md bg-blue-sb flex items-center justify-evenly">
           <button
