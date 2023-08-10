@@ -5,7 +5,7 @@ function Forecast({ title, items }) {
   console.log(items);
   return (
     <div className="bg-white bg-opacity-50 rounded-md py-2 h-48">
-      <div className="flex items-center justify-start mt-4">
+      <div className="flex items-center justify-start ">
         <p className="text-blue-body font-medium uppercase pl-3">{title}</p>
       </div>
       <hr className="my-2 mx-3 " />

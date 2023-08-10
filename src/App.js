@@ -32,42 +32,42 @@ function App() {
     fetchWeather();
   }, [query, units]);
 
-  const formatBackground = () => {
-    if (!weather) return "from-cyan-700 to-blue-700";
-    const threshold = units === "metric" ? 20 : 60;
-    if (weather.temp <= threshold) return "from-cyan-700 to-blue-700";
+  // const formatBackground = () => {
+  //   if (!weather) return "from-cyan-700 to-blue-700";
+  //   const threshold = units === "metric" ? 20 : 60;
+  //   if (weather.temp <= threshold) return "from-cyan-700 to-blue-700";
 
-    return "from-yellow-700 to-orange-700";
-  };
+  //   return "from-yellow-700 to-orange-700";
+  // };
 
   return (
     <>
-      <div className="bg-blue-body h-screen w-full">
-        <div className="h-16 bg-blue-nav flex justify-center items-center">
+      <div className="flex items-center flex-col bg-blue-body h-fit md:h-screen w-full">
+        <div className="h-16 bg-blue-nav w-full flex justify-center items-center">
           <img src={logo} alt="logo" className="w-16 h-16"></img>
           <p className="font-Jua text-3xl">Upstorm</p>
         </div>
 
         <Inputs setQuery={setQuery} units={units} setUnits={setUnits} />
-        <div className="flex rounded-md bg-blue-sb w-10/12 mx-48 mt-3 bg-cloud-bg bg-cover">
-          {weather && (
-            <div className="flex">
+        {weather && (
+        <div className="flex justify-center items-center h-auto rounded-md p-6 bg-blue-sb w-9/12 bg-cloud-bg bg-cover">
+            <div className="flex justify-center items-center flex-wrap">
               {/* <TimeAndLocation weather={weather} /> */}
-              <div>
+              <div className="">
                 <TemperatureAndDetails weather={weather} />
               </div>
 
-              <div className="ml-20 px-10">
-                <div className="mt-8">
+              <div className="pl-10 mt-10 md:mt-0 ">
+                <div className="">
                   <Forecast title="hourly forecast" items={weather.hourly} />
                 </div>
-                <div className="mt-8">
+                <div className="mt-10">
                   <Forecast title="daily forecast" items={weather.daily} />
                 </div>
               </div>
             </div>
+          </div>
           )}
-        </div>
         <ToastContainer autoClose={1000} theme="colored" newestOnTop={true} />
       </div>
     </>
