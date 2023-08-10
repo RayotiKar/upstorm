@@ -43,9 +43,9 @@ function Inputs({ setQuery, units, setUnits }) {
   return (
     <>
       <div className="w-full flex items-center justify-center pt-4">
-        <div className="w-16 h-16 bg-blue-sb rounded-full flex justify-center items-center">
+        <div className="w-10 h-10 md:w-16 md:h-16 bg-blue-sb rounded-full flex justify-center items-center">
           <UilLocationPoint
-            size={30}
+            // size={28}
             className="text-black cursor-pointer transition ease-out hover:scale-150"
             onClick={handleLocationClick}
           />
@@ -55,21 +55,21 @@ function Inputs({ setQuery, units, setUnits }) {
           onChange={(e) => setCity(e.currentTarget.value)}
           onKeyUp={searchLocation}
           type="text"
-          placeholder="Search for any location"
-          className="text-xl font-Quicksand m-5 p-2 rounded-md w-60 md:w-96 bg-blue-sb shadow-xl focus:outline-none capitalize placeholder:lowercase"
+          placeholder="🔍 Search for any location"
+          className="text-base sm:text-xl font-Quicksand m-5 p-2 rounded-md h-7 sm:h-11 w-40 sm:w-60 md:w-96 bg-blue-sb shadow-xl focus:outline-none capitalize placeholder:lowercase"
         />
-        <div className="h-11 w-24 rounded-md bg-blue-sb flex items-center justify-evenly">
+        <div className="h-7 sm:h-11 w-16 sm:w-24 rounded-md bg-blue-sb flex items-center justify-center">
           <button
             name="metric"
-            className="font-semibold text-2xl text-black font-Quicksand transition ease-out hover:scale-125"
+            className="font-semibold text-base sm:text-xl text-black font-Quicksand transition ease-out hover:scale-125"
             onClick={handleUnitsChange}
           >
             °C
           </button>
-          {/* <p className="text-xl text-blue-nav mx-1">|</p> */}
+          <p className="text-xl text-blue-nav mx-1">|</p>
           <button
             name="imperial"
-            className="font-semibold text-2xl text-black font-Quicksand transition ease-out hover:scale-125"
+            className="font-semibold text-base sm:text-xl text-black font-Quicksand transition ease-out hover:scale-125"
             onClick={handleUnitsChange}
           >
             °F

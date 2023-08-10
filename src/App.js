@@ -32,17 +32,9 @@ function App() {
     fetchWeather();
   }, [query, units]);
 
-  // const formatBackground = () => {
-  //   if (!weather) return "from-cyan-700 to-blue-700";
-  //   const threshold = units === "metric" ? 20 : 60;
-  //   if (weather.temp <= threshold) return "from-cyan-700 to-blue-700";
-
-  //   return "from-yellow-700 to-orange-700";
-  // };
-
   return (
     <>
-      <div className="flex items-center flex-col bg-blue-body h-fit md:h-screen w-full">
+      <div className="flex items-center flex-col bg-blue-body h-fit 2xl:h-screen w-full">
         <div className="h-16 bg-blue-nav w-full flex justify-center items-center">
           <img src={logo} alt="logo" className="w-16 h-16"></img>
           <p className="font-Jua text-3xl">Upstorm</p>
@@ -52,12 +44,11 @@ function App() {
         {weather && (
         <div className="flex justify-center items-center h-auto rounded-md p-6 bg-blue-sb w-9/12 bg-cloud-bg bg-cover">
             <div className="flex justify-center items-center flex-wrap">
-              {/* <TimeAndLocation weather={weather} /> */}
               <div className="">
                 <TemperatureAndDetails weather={weather} />
               </div>
 
-              <div className="pl-10 mt-10 md:mt-0 ">
+              <div className="pl-0 xl:pl-10 mt-10 xl:mt-0 ">
                 <div className="">
                   <Forecast title="hourly forecast" items={weather.hourly} />
                 </div>
