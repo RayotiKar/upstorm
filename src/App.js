@@ -1,70 +1,78 @@
+import "./App.css";
 
-// import './App.css';
-import React, { useState } from 'react'
-import axios from 'axios'
+import Inputs from "./components/Inputs";
+import TemperatureAndDetails from "./components/TemperatureAndDetails";
+import Forecast from "./components/Forecast";
+import getFormattedWeatherData from "./services/weatherService";
+import { useEffect, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import logo from "./assets/logo.svg";
 
 function App() {
-  const [data, setData] = useState({})
-  const [location, setLocation] = useState('')
+  const [query, setQuery] = useState(null);
+  const [units, setUnits] = useState("metric");
+  const [weather, setWeather] = useState(null);
 
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=58523e4e9c0d09060c03b702457c0086
-  `
+  useEffect(() => {
+    const fetchWeather = async () => {
+      const message = query.q ? query.q : "current location.";
 
-  const searchLocation = (event) => {
-    if (event.key === 'Enter') {
-      axios.get(url).then((response) => {
-        setData(response.data)
-        console.log(response.data)
-      })
-      setLocation('')
-    }
-  }
+      toast.info("Fetching weather for " + message);
+
+      await getFormattedWeatherData({ ...query, units }).then((data) => {
+        toast.success(
+          `Successfully fetched weather for ${data.name}, ${data.country}.`
+        );
+
+        setWeather(data);
+      });
+    };
+
+    fetchWeather();
+  }, [query, units]);
+
+  const formatBackground = () => {
+    if (!weather) return "from-cyan-700 to-blue-700";
+    const threshold = units === "metric" ? 20 : 60;
+    if (weather.temp <= threshold) return "from-cyan-700 to-blue-700";
+
+    return "from-yellow-700 to-orange-700";
+  };
 
   return (
-    <div className="app">
-      <div className="search">
-        <input
-          value={location}
-          onChange={event => setLocation(event.target.value)}
-          onKeyPress={searchLocation}
-          placeholder='Enter Location'
-          type="text" />
-      </div>
-      <div className="container">
-        <div className="top">
-          <div className="location">
-            <p>{data.name}</p>
-          </div>
-          <div className="temp">
-            {data.main ? <h1>{data.main.temp.toFixed()}°C</h1> : null}
-          </div>
-          <div className="description">
-            {data.weather ? <p>{data.weather[0].main}</p> : null}
-          </div>
+    <>
+      <div className="bg-blue-body h-screen w-full">
+        <div className="h-16 bg-blue-nav flex justify-center items-center">
+          <img src={logo} alt="logo" className="w-16 h-16"></img>
+          <p className="font-Jua text-3xl">Upstorm</p>
         </div>
 
-        {data.name !== undefined &&
-          <div className="bottom">
-            <div className="feels">
-              {data.main ? <p className='bold'>{data.main.feels_like.toFixed()}°F</p> : null}
-              <p>Feels Like</p>
-            </div>
-            <div className="humidity">
-              {data.main ? <p className='bold'>{data.main.humidity}%</p> : null}
-              <p>Humidity</p>
-            </div>
-            <div className="wind">
-              {data.wind ? <p className='bold'>{data.wind.speed.toFixed()} MPH</p> : null}
-              <p>Wind Speed</p>
-            </div>
-          </div>
-        }
+        <Inputs setQuery={setQuery} units={units} setUnits={setUnits} />
+        <div className="flex rounded-md bg-blue-sb w-10/12 mx-48 mt-3 bg-cloud-bg bg-cover">
+          {weather && (
+            <div className="flex">
+              {/* <TimeAndLocation weather={weather} /> */}
+              <div>
+                <TemperatureAndDetails weather={weather} />
+              </div>
 
-
-
+              <div className="ml-20 px-10">
+                <div className="mt-8">
+                  <Forecast title="hourly forecast" items={weather.hourly} />
+                </div>
+                <div className="mt-8">
+                  <Forecast title="daily forecast" items={weather.daily} />
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+        <ToastContainer autoClose={1000} theme="colored" newestOnTop={true} />
       </div>
-    </div>
+    </>
   );
 }
 
 export default App;
+
